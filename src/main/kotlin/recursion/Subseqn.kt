@@ -1,23 +1,29 @@
 package recursion
 
 class Subseqn {
-    fun rec_printSubSeq(i: Int, array: IntArray, lst: ArrayList<Int>) {
+    fun rec_printSubSeq(i: Int, array: IntArray, lst: ArrayList<Int>
+                        , res: ArrayList<ArrayList<Int>>) {
         if (i >= array.size) {
-            println(lst)
+            res.add(ArrayList(lst))
             return
         }
+
         lst.add(array[i])
-        rec_printSubSeq(i+1, array, lst)
+        rec_printSubSeq(i+1, array, lst, res)
         lst.removeAt(lst.size-1)
-        rec_printSubSeq(i+1, array, lst)
+        var indx = i
+        while (indx + 1 < array.size && array[indx] == array[indx+1]) {indx++}
+        rec_printSubSeq(indx+1, array, lst, res)
     }
 
-    fun printSubSeq(arr: IntArray) {
-        rec_printSubSeq(0, arr, ArrayList())
+    fun subsetsWithDup(nums: IntArray):List<List<Int>> {
+        val res = ArrayList<ArrayList<Int>>()
+        rec_printSubSeq(0, nums, ArrayList(), res)
+        return res
     }
 }
 
 fun main() {
     val s = Subseqn()
-    s.printSubSeq(intArrayOf(1,2,3))
+    println(s.subsetsWithDup(intArrayOf(1,2,2)))
 }
