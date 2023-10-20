@@ -57,5 +57,5 @@ class NQueens {
 
 fun main() {
     val n = NQueens()
-    println(n.solveNQueens(4))
+    println(n.solveNQueens(2))
 }
